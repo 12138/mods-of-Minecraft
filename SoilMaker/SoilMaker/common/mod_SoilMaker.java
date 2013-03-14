@@ -55,7 +55,7 @@ public static CommonProxy proxy;
  {
 	 proxy.registerRenderInformation();
 	 
-	 SoilMaker = new BlockSoilMaker(SoilMakerID,false,1).setBlockName("SoilMaker").setHardness(3.5F).setRequiresSelfNotify().setCreativeTab(CreativeTabs.tabDecorations);
+	 SoilMaker = new BlockSoilMaker(SoilMakerID,false,1).setUnlocalizedName("SoilMaker").setHardness(3.5F).setCreativeTab(CreativeTabs.tabDecorations);
 	 
 	
 	 LanguageRegistry.instance().addNameForObject(SoilMaker,"en_US","Soil Maker");
@@ -75,7 +75,7 @@ public static CommonProxy proxy;
 			 "xxx",
 			 " y ",
 			 'x', Item.ingotIron,
-			 'y',Block.stoneOvenIdle
+			 'y',Block.furnaceIdle
 			 
 
 

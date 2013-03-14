@@ -9,7 +9,6 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class CommonProxy implements IGuiHandler{
 	
 	
-	  public static String BLOCKS_PNG = "/SoilMaker/png/Blocks.png";
 	  
 public void registerRenderInformation()
 {

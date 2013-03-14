@@ -18,13 +18,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
+import net.minecraft.inventory.ISidedInventory;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 
 
-public class TileEntitySoilMaker extends TileEntity implements IInventory,
-		ISidedInventory {
+public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	private ItemStack[] SoilMakerCon = new ItemStack[11];
     //已经经过的燃烧时间
 	public int durationTime = 0;
@@ -33,15 +32,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory,
 	public int curItemTime = 0;
 	private boolean Is =false;
 
-	@Override
-	public int getStartInventorySide(ForgeDirection side) {
-		return this.SoilMakerCon.length;
-	}
-
-	@Override
-	public int getSizeInventorySide(ForgeDirection side) {
-		return this.SoilMakerCon.length;
-	}
+	
 
 	@Override
 	public int getSizeInventory() {
@@ -302,7 +293,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory,
                 	boo = true;
             }
             if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) boo = true;
-            if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) boo = true;
+            if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD")) boo = true;
             if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) boo = true;
             if (var2 instanceof ItemArmor && ((ItemArmor) var2).getArmorMaterial().equals("CLOTH")) boo = true;
             if (var2 instanceof ItemSeeds) boo = true;
@@ -463,7 +454,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory,
                 }
             }
             if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemSword && ((ItemSword) var2).func_77825_f().equals("WOOD")) return 200;
+            if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD")) return 200;
             if (var2 instanceof ItemHoe && ((ItemHoe) var2).func_77842_f().equals("WOOD")) return 200;
             if (var1 == Item.stick.itemID) return 100;
             if (var1 == Item.coal.itemID) return 1600;
@@ -479,6 +470,24 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory,
 	    {
 	        return getItemBurnTime(par0ItemStack) > 0;
 	    }
+
+	/**
+	* @return
+	* @see net.minecraft.inventory.IInventory#func_94042_c()
+	*/
+	@Override
+	public boolean func_94042_c() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 
 	
 
