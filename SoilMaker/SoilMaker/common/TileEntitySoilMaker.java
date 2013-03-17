@@ -27,7 +27,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	private ItemStack[] SoilMakerCon = new ItemStack[11];
     //已经经过的燃烧时间
 	public int durationTime = 0;
-	
+	private String field_94130_e;
 	public int continuanceTime = 0;
 	public int curItemTime = 0;
 	private boolean Is =false;
@@ -38,13 +38,22 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	public int getSizeInventory() {
 		return SoilMakerCon.length;
 	}
+	@Override
+	 public boolean func_94042_c()
+	    {
+	        return this.field_94130_e != null && this.field_94130_e.length() > 0;
+	    }
 
+	    public void func_94129_a(String par1Str)
+	    {
+	        this.field_94130_e = par1Str;
+	    }
 	@Override
 	public ItemStack getStackInSlot(int var1) {
 
 		return this.SoilMakerCon[var1];
 	}
-
+	@Override
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		NBTTagList var2 = par1NBTTagCompound.getTagList("Items");
@@ -63,7 +72,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 		this.continuanceTime = par1NBTTagCompound.getShort("continuanceTime");
 		this.curItemTime = getItemBurnTime(SoilMakerCon[0]);
 	}
-
+	@Override
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setShort("durationTime", (short) this.durationTime);
@@ -471,16 +480,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	        return getItemBurnTime(par0ItemStack) > 0;
 	    }
 
-	/**
-	* @return
-	* @see net.minecraft.inventory.IInventory#func_94042_c()
-	*/
-	@Override
-	public boolean func_94042_c() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean func_94041_b(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub

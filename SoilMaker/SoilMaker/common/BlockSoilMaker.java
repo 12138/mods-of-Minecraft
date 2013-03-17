@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -37,10 +38,12 @@ public class BlockSoilMaker extends BlockContainer {
 		isAct=par2;
 		this.setStepSound(soundStoneFootstep);
 	}
+	
+	@Override
 	public int idDropped(int par1, Random par2Random, int par3) {
 		return mod_SoilMaker.SoilMaker.blockID;
 	}
-
+@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 		this.setDefaultDirection(par1World, par2, par3, par4);
@@ -88,6 +91,7 @@ public class BlockSoilMaker extends BlockContainer {
 		this.up=par1IconRegister.func_94245_a("SoilMaker:SoilMakerU");
 		this.down=par1IconRegister.func_94245_a("SoilMaker:SoilMakerD");
 	}
+	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         if (par5 == 1)
@@ -112,6 +116,7 @@ public class BlockSoilMaker extends BlockContainer {
 						: (par1 == 3 ? this.front
 								: this.field_94336_cN));
 	}
+	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
 		
@@ -146,7 +151,7 @@ public class BlockSoilMaker extends BlockContainer {
             }
         }
     }
-
+	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3,int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
 			float par8, float par9) {
 		if (par1World.isRemote) {
@@ -198,9 +203,9 @@ public class BlockSoilMaker extends BlockContainer {
 		
 
 	
-	
+
 	 public void onBlockPlacedBy(World par1World, int par2, int par3, int par4,
-			EntityLiving par5EntityLiving) {
+			EntityLiving par5EntityLiving,ItemStack par6ItemStack) {
 		int var6 = MathHelper
 				.floor_double((double) (par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -219,8 +224,13 @@ public class BlockSoilMaker extends BlockContainer {
 		if (var6 == 3) {
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, 4,2);
 		}
+		
+		if (par6ItemStack.hasDisplayName())
+        {
+            ((TileEntitySoilMaker)par1World.getBlockTileEntity(par2, par3, par4)).func_94129_a(par6ItemStack.getDisplayName());
+        }
 	}
-
+@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4,
 			int par5, int par6) {
 		if (!keepSoilMakerInventory) {
@@ -272,6 +282,7 @@ public class BlockSoilMaker extends BlockContainer {
 
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
+	
 
 	
 	
