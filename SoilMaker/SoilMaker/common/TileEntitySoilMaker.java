@@ -39,7 +39,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 		return SoilMakerCon.length;
 	}
 	@Override
-	 public boolean func_94042_c()
+	 public boolean isInvNameLocalized()
 	    {
 	        return this.field_94130_e != null && this.field_94130_e.length() > 0;
 	    }
@@ -480,9 +480,8 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	        return getItemBurnTime(par0ItemStack) > 0;
 	    }
 
-	
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack) {
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return false;
 	}

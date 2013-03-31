@@ -85,11 +85,11 @@ public class BlockSoilMaker extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister) {
-		this.field_94336_cN=par1IconRegister.func_94245_a("SoilMaker:SoilMakerB");
-		this.front=par1IconRegister.func_94245_a("SoilMaker:SoilMakerF");
-		this.up=par1IconRegister.func_94245_a("SoilMaker:SoilMakerU");
-		this.down=par1IconRegister.func_94245_a("SoilMaker:SoilMakerD");
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.blockIcon=par1IconRegister.registerIcon("SoilMaker:SoilMakerB");
+		this.front=par1IconRegister.registerIcon("SoilMaker:SoilMakerF");
+		this.up=par1IconRegister.registerIcon("SoilMaker:SoilMakerU");
+		this.down=par1IconRegister.registerIcon("SoilMaker:SoilMakerD");
 	}
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
@@ -104,7 +104,7 @@ public class BlockSoilMaker extends BlockContainer {
 		else
         {
             int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-            return par5 != var6 ? this.field_94336_cN : this.front;
+            return par5 != var6 ? this.blockIcon : this.front;
         }
         
         
@@ -114,7 +114,7 @@ public class BlockSoilMaker extends BlockContainer {
 		return par1 == 1 ? this.up
 				: (par1 == 0 ? this.down
 						: (par1 == 3 ? this.front
-								: this.field_94336_cN));
+								: this.blockIcon));
 	}
 	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
