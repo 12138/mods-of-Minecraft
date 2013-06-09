@@ -110,7 +110,7 @@ public class BlockSoilMaker extends BlockContainer {
         
     }
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2){
+	public Icon getIcon(int par1, int par2){
 		return par1 == 1 ? this.up
 				: (par1 == 0 ? this.down
 						: (par1 == 3 ? this.front
