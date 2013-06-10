@@ -17,6 +17,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import Jimmynator.common.Jimmynator;
+import Jimmynator.common.entity.EntityLightingMjolnir;
 import Jimmynator.common.item.ItemHammer;
 
 public class ItemMjolnir extends ItemHammer {
@@ -73,10 +74,12 @@ public class ItemMjolnir extends ItemHammer {
 			EntityPlayer par3EntityPlayer, int par4) {
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 	    float f = j / 20.0F;
+	    if(par3EntityPlayer.capabilities.isCreativeMode||Jimmynator.proxy.isEquid(par3EntityPlayer, "knight")){
 	    if (f > 1.0F)
 	    {
 	      aoe(par1ItemStack, par2World, par3EntityPlayer);
 	      par3EntityPlayer.swingItem();
+	    }
 	    }
 		
 	}
@@ -96,9 +99,9 @@ public class ItemMjolnir extends ItemHammer {
 	        double d5 = entity.getDistanceToEntity(par3EntityPlayer);
 	        if (d5 <= 8.0D)
 	        {
-	          par1ItemStack.damageItem(8, par3EntityPlayer);
+	          par1ItemStack.damageItem(6, par3EntityPlayer);
 	          hitEntity(par1ItemStack, entity, par3EntityPlayer);
-	          EntityLightningBolt lighting=new EntityLightningBolt(par2World, entity.posX, entity.posY, entity.posZ);
+	          EntityLightingMjolnir lighting=new EntityLightingMjolnir(par2World,par3EntityPlayer, entity.posX, entity.posY, entity.posZ);
 	          par2World.spawnEntityInWorld(lighting);
 	          par2World.playSoundEffect(par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, "random.explode", 4.0F, (1.0F + (par2World.rand.nextFloat() - par2World.rand.nextFloat()) * 0.2F) * 0.7F);
 	        }

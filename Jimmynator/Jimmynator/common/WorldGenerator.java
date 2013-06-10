@@ -46,13 +46,13 @@ public class WorldGenerator implements IWorldGenerator {
 	      int Zcoord = j + random.nextInt(16);
 	      new WorldGenMinableNether(Jimmynator.blockLuciferite.blockID, 0, 4).generate(world, random, Xcoord, Ycoord, Zcoord);
 	    }
-//	    for (int x = 0; x < 16; x++)
-//	    {
-//	      int Xcoord = i + random.nextInt(16);
-//	      int Ycoord = random.nextInt(128);
-//	      int Zcoord = j + random.nextInt(16);
-//	      new WorldGenMinableNether(blockSpongeAir.bO, 2, 32).a(world, random, Xcoord, Ycoord, Zcoord);
-//	    }
+	    for (int x = 0; x < 16; x++)
+	    {
+	      int Xcoord = i + random.nextInt(16);
+	      int Ycoord = random.nextInt(128);
+	      int Zcoord = j + random.nextInt(16);
+	      new WorldGenMinableNether(Jimmynator.methane.blockID, 2, 64).generate(world, random, Xcoord, Ycoord, Zcoord);
+	    }
 		
 	}
 

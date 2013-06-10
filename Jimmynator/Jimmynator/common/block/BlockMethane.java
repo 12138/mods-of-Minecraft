@@ -2,26 +2,21 @@ package Jimmynator.common.block;
 
 import java.util.Random;
 
+import Jimmynator.common.Jimmynator;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import Jimmynator.common.Jimmynator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-public class BlockAir extends Block {
-
-	public BlockAir(int par1, Material par2Material) {
+public class BlockMethane extends Block {
+	public BlockMethane(int par1, Material par2Material) {
 		super(par1, par2Material);
 		this.setBlockBounds(0, 0, 0, 0, 0, 0);
+	
 	}
 
 	@Override
@@ -36,6 +31,23 @@ public class BlockAir extends Block {
         return false;
     }
 
+
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4,
+			int par5, int par6) {
+if(par1World.getBlockId(par2, par3, par4)==Block.torchWood.blockID||par1World.getBlockId(par2, par3, par4)==Block.fire.blockID)
+	par1World.newExplosion(null, par2, par3, par4, 6.0F,true,true);
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+	}
+
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3,
+			int par4, int par5) {
+		if(par5==Block.torchWood.blockID||par5==Block.fire.blockID||par5==0){
+			par1World.newExplosion(null, par2, par3, par4,6.0F,true,true);
+		}
+		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+	}
 
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3) {
@@ -61,6 +73,4 @@ public class BlockAir extends Block {
 	public int getRenderType() {
 		return -1;
 	}
-	
-
 }

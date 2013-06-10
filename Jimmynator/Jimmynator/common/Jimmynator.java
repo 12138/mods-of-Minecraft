@@ -1,21 +1,27 @@
 package Jimmynator.common;
 
 
+import java.lang.ProcessBuilder.Redirect;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraft.world.biome.BiomeCache;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import Jimmynator.common.block.BlockAir;
 import Jimmynator.common.block.BlockAnvil;
+import Jimmynator.common.block.BlockMethane;
 import Jimmynator.common.block.BlockNetherOrb;
 import Jimmynator.common.block.BlockOmelette;
 import Jimmynator.common.block.BlockOrb;
@@ -24,8 +30,13 @@ import Jimmynator.common.block.BlockSponge;
 import Jimmynator.common.block.BlockWheat;
 import Jimmynator.common.block.tileentity.TileEntityOrb;
 import Jimmynator.common.block.tileentity.TileEntityPan;
-import Jimmynator.common.entity.EntityTomahawk;
-import Jimmynator.common.item.*;
+import Jimmynator.common.entity.EntityHorse;
+import Jimmynator.common.item.ItemBat;
+import Jimmynator.common.item.ItemHammer;
+import Jimmynator.common.item.ItemJimmynator;
+import Jimmynator.common.item.ItemNetherAxe;
+import Jimmynator.common.item.ItemNetherPickaxe;
+import Jimmynator.common.item.JimmItemArmor;
 import Jimmynator.common.item.archer.ItemEtherBow;
 import Jimmynator.common.item.archer.ItemMechanicBow;
 import Jimmynator.common.item.archer.ItemNetherBow;
@@ -54,6 +65,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @NetworkMod(serverSideRequired = false, clientSideRequired = true,packetHandler=PacketHandler.class,channels={"Jimmynator"})
 @Mod(modid = "Jimmynator", name = "Jimmynator", version = "2.5.0")
@@ -183,6 +196,7 @@ public class Jimmynator {
 	public static Block air;
 	public static Block pan;
 	public static Block blockAnvil;
+	public static Block methane;
 	
 	public static int woodHammerId;
 	public static int stoneHammerId;
@@ -302,6 +316,7 @@ public class Jimmynator {
 	public static int airId;
 	public static int panId;
 	public static int blockAnvilId;
+	public static int methaneId;
 
 	 //CreativeTabs 
 		public static CreativeTabs tabJimmynator	= new CreativeTabJimmynator(CreativeTabs.getNextID(),"Jimmynator");
@@ -427,13 +442,13 @@ public class Jimmynator {
 		 airId=config.getBlock("Block air", 1241).getInt();
 		 panId=config.getBlock("Block pan", 1242).getInt();
 		 blockAnvilId=config.getBlock("Block anvil", 1243).getInt();
-	    
+	    methaneId=config.getBlock("Blockddil", 1244).getInt();
 		config.save();
 	}
 	@Init
 	public void InitMod(FMLInitializationEvent event){
 
-EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
+//EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 //EntityRegistry.registerModEntity(EntityStaffFireball.class, "fireball", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 //EntityRegistry.registerModEntity(EntityStaffIceball.class, "iceball", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 //EntityRegistry.registerModEntity(EntityStaffLifeball.class, "lifeball", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
@@ -450,7 +465,7 @@ EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistr
 		lifeOrb=new ItemJimmynator(lifeOrbId).setUnlocalizedName("lifeOrb").setContainerItem(orb);
 		deathOrb=new ItemJimmynator(deathOrbId).setUnlocalizedName("deathOrb").setContainerItem(orb);
 
-		fireStaff=new ItemStaff(fireStaffId,1).setUnlocalizedName("firestaff");
+		fireStaff=new ItemStaff(fireStaffId,1).setUnlocalizedName("fireStaff");
 		iceStaff=new ItemStaff(iceStaffId,2).setUnlocalizedName("iceStaff");
 		lifeStaff=new ItemStaff(lifeStaffId,3).setUnlocalizedName("lifeStaff");
 		deathStaff=new ItemStaff(deathStaffId,4).setUnlocalizedName("deathStaff");
@@ -555,17 +570,24 @@ EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistr
 	   Block.blocksList[Block.sponge.blockID]=null;
 	   Block.blocksList[Block.sponge.blockID]=sponge;
 	   pan=new BlockPan(panId).setUnlocalizedName("pan");
+	   methane=new BlockMethane(methaneId, Material.air).setUnlocalizedName("methane");
       blockAnvil=new BlockAnvil(blockAnvilId, Material.rock).setUnlocalizedName("blockAnvil");
 	  GameRegistry.registerTileEntity(TileEntityOrb.class, "tileentityorb");
 	  GameRegistry.registerTileEntity(TileEntityPan.class, "tileentitypan");
 	  GameRegistry.registerWorldGenerator(new WorldGenerator());
-		NetworkRegistry.instance().registerGuiHandler(this, proxy);
+	  int redColor = (255 << 16);
+	    int orangeColor = (255 << 16)+ (200 << 8);
+	  EntityRegistry.registerGlobalEntityID(EntityHorse.class, "hourse", 21,redColor,orangeColor);
+	  EntityRegistry.addSpawn(EntityHorse.class, 20, 0, 10, EnumCreatureType.creature, BiomeGenBase.plains);
+	  NetworkRegistry.instance().registerGuiHandler(this, proxy);
+		
+//		  registerBlockAndItsName(methane, "Block fthercoal", "ff煤矿");
 	  registerBlockAndItsName(blockNethercoal, "Block Nethercoal", "地狱煤矿");
 	    registerBlockAndItsName(blockDemonite, "Block Demonite", "地狱矿石");
 	    registerBlockAndItsName(blockLuciferite, "Block Luciferite", "撒旦钻石矿");
 	    registerBlockAndItsName(blockWheat, "Block Wheat", "麦垛");
 	    registerBlockAndItsName(blockOrb, "Block Orb", "魔法台");
-	    registerBlockAndItsName(air, "Block Air", "空气");
+//	    registerBlockAndItsName(air, "Block Air", "空气");
 	    registerBlockAndItsName(pan, "Pan", "煎锅");
 	    registerBlockAndItsName(blockAnvil, "Anvil", "打铁台");
 	    
@@ -683,9 +705,13 @@ EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistr
 		MinecraftForge.setToolClass(tomahawk, "axe", 4);
 		MinecraftForge.setToolClass(netherAxe, "axe", 4);
 		MinecraftForge.setToolClass(netherPickaxe, "pickaxe", 4);
+		LanguageRegistry.instance().addStringLocalization("itemGroup.Jimmynator", "zh_CN", "职业mod");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.Jimmynator", "en_US", "Jimmynator");
 		proxy.registerRenderInformation();
 		initRepice();
-	}
+		TickRegistry.registerTickHandler(new TickHandler(), Side.SERVER);
+
+		TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);}
 	private void initRepice() {
 		 GameRegistry.addShapedRecipe(new ItemStack(Block.ice), new Object[] { "XXX", "XXX", "XXX", Character.valueOf('X'), Block.blockSnow });
 
@@ -741,7 +767,7 @@ EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistr
 
 		    GameRegistry.addShapelessRecipe(new ItemStack(firePowder, 4), new Object[] { Item.blazePowder, magicPowder });
 
-		    GameRegistry.addShapelessRecipe(new ItemStack(lifePowder, 8), new Object[] { Item.emerald, magicPowder });
+		    GameRegistry.addShapelessRecipe(new ItemStack(lifePowder, 4), new Object[] { Item.emerald, magicPowder });
 
 		    GameRegistry.addShapelessRecipe(new ItemStack(deathPowder, 4), new Object[] { Item.eyeOfEnder, magicPowder });
 

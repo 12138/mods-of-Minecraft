@@ -37,10 +37,10 @@ public class ItemEtherBow extends ItemBow {
 			 if(count>0){
 					this.iconIndex=this.iconArray[1];
 					}
-						if(count>26){
+						if(count>20*3){
 					this.iconIndex=this.iconArray[2];
 					}
-						if(count>36){
+						if(count>20*5){
 					this.iconIndex=this.iconArray[3];
 					}
 				
@@ -63,7 +63,7 @@ public class ItemEtherBow extends ItemBow {
 
 	        if (flag || (Jimmynator.proxy.isEquid(par3EntityPlayer, "archer")&&par3EntityPlayer.inventory.hasItem(Item.arrow.itemID)))
 	        {
-	            float f = (float)j / 20.0F;
+	            float f = (float)j / 30.0F;
 	            f = (f * f + f * 2.0F) / 3.0F;
 
 	            if ((double)f < 0.1D)
