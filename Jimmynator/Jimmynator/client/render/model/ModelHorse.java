@@ -74,12 +74,12 @@ public class ModelHorse extends ModelBase
       ear1.setTextureSize(64, 32);
       ear1.mirror = true;
       setRotation(ear1, 0.4014257F, 0.0F, 0.0F);
-      ear2 = new ModelRenderer(this, 77, 0);
+      ear2 = new ModelRenderer(this, 60, 30);
       ear2.addBox(-2F, -13F, 0F, 1, 1, 1);
       ear2.setRotationPoint(0F, 7F, -6F);
       ear2.setTextureSize(64, 32);
       ear2.mirror = true;
-      setRotation(ear2, 0.0070062F, 0F, 0F);
+      setRotation(ear2,0.4014257F, 0.0F, 0.0F);
       tail = new ModelRenderer(this, 0, 1);
       tail.addBox(-1F, 0F, 0F, 2, 10, 2);
       tail.setRotationPoint(0F, 6F, 9F);
@@ -136,12 +136,6 @@ public class ModelHorse extends ModelBase
   @Override
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,Entity entity)
   {
-	
-	        this.head.rotateAngleX = f4 / (180F / (float)Math.PI);
-	        this.head.rotateAngleY = f3 / (180F / (float)Math.PI);
-	        this.ear1.rotateAngleX = f4 / (180F / (float)Math.PI);
-	        this.ear2.rotateAngleX = f4 / (180F / (float)Math.PI);
-	        this.neck.rotateAngleX= f4 / (180F / (float)Math.PI);
 	        this.body.rotateAngleX = ((float)Math.PI / 2F);
 	        this.leg1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 	        this.leg2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;

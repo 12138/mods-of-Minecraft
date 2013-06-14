@@ -38,11 +38,12 @@ public class ItemTomahawk extends ItemTool {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer, int par4) {
-		System.out.println(FMLCommonHandler.instance().getEffectiveSide().name());
+
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 	    float f = j / 20.0F;
 	    if (f > 1.0F)
-	    {
+	    {if (Jimmynator.proxy.isEquid(par3EntityPlayer, "knight")||par3EntityPlayer.capabilities.isCreativeMode)
+	      {	
 	        EntityTomahawk entityTomahawk= new EntityTomahawk(par2World, par1ItemStack, par3EntityPlayer, f * 2.0F);
 	       par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (Item.itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 	        par3EntityPlayer.inventory.consumeInventoryItem(Jimmynator.tomahawk.itemID);
@@ -52,6 +53,7 @@ public class ItemTomahawk extends ItemTool {
 	        	//  System.out.println("spawn");
 	          }
 	        }
+	    }
 	    }
 		
 	}

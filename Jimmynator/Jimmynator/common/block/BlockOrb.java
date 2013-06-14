@@ -369,12 +369,10 @@ public class BlockOrb extends BlockContainer {
 //		return par1==1?this.top:par1==0?this.bottom:this.side;
 //	}
 //
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void registerIcons(IconRegister par1IconRegister) {
-//	this.top=par1IconRegister.registerIcon("Jimmynator:orbTop");
-//	this.side=par1IconRegister.registerIcon("Jimmynator:orbSide");
-//	this.bottom=par1IconRegister.registerIcon("Jimmynator:orbBottom");
-//	}
+	@Override
+	@SideOnly(Side.CLIENT)
+public void registerIcons(IconRegister par1IconRegister) {
+   this.blockIcon = par1IconRegister.registerIcon("Jimmynator:"+this.getUnlocalizedName());
+	}
 
 }

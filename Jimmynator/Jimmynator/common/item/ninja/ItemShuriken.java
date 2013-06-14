@@ -1,5 +1,6 @@
 package Jimmynator.common.item.ninja;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ public class ItemShuriken extends ItemJimmynator {
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,
 			EntityPlayer par3EntityPlayer) {
-		
+		System.out.println(FMLCommonHandler.instance().getEffectiveSide().name());
 	      if (Jimmynator.proxy.isEquid(par3EntityPlayer, "ninja")||par3EntityPlayer.capabilities.isCreativeMode)
 	      {	      par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (Item.itemRand.nextFloat() * 0.4F + 0.8F));
 

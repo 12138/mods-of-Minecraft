@@ -14,7 +14,7 @@ private int demage;
 		super(par1, par2EnumToolMaterial);
 		this.setMaxDamage(3122);
 		this.setCreativeTab(Jimmynator.tabJimmynator);
-		this.demage=11+par2EnumToolMaterial.getDamageVsEntity();
+		this.demage=2+par2EnumToolMaterial.getDamageVsEntity();
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -26,4 +26,6 @@ private int demage;
 	public int getDamageVsEntity(Entity par1Entity) {
 		return this.demage;
 	}
+
+
 }

@@ -20,13 +20,6 @@ public class PacketPan extends PacketBase {
 	public static PacketPan instance=new PacketPan();
 	@Override
 	void readClient(int id, ByteArrayDataInput data, Object[] extradata) {
-		
-
-	}
-
-	@Override
-	void readServer(int id, ByteArrayDataInput data, Object[] extradata) {
-
 		int itemid=data.readInt();
 		int x=data.readInt();
 		int y=data.readInt();
@@ -42,6 +35,13 @@ public class PacketPan extends PacketBase {
 				pan.inPan=null;
 			}
 		}
+
+	}
+
+	@Override
+	void readServer(int id, ByteArrayDataInput data, Object[] extradata) {
+
+
 
 
 	}
@@ -69,7 +69,7 @@ public class PacketPan extends PacketBase {
 		pkt.data = bos.toByteArray();
 		pkt.length = bos.size();
 		pkt.isChunkDataPacket = false;
-		PacketDispatcher.sendPacketToAllPlayers(pkt);
+		PacketDispatcher.sendPacketToServer(pkt);
 		
 	}
 

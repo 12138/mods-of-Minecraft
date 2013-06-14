@@ -59,7 +59,7 @@ public class BlockPan extends BlockContainer {
 					if(canCook(par5EntityPlayer.inventory.getCurrentItem())){
 						pan.inPan=par5EntityPlayer.inventory.getCurrentItem().splitStack(1);
 						PacketPan.panChange(par5EntityPlayer.inventory.getCurrentItem().itemID, par2, par3, par4);
-						//BUG de more
+						
 						par5EntityPlayer.inventory.consumeInventoryItem(par5EntityPlayer.inventory.getCurrentItem().itemID);
 					}
 				}

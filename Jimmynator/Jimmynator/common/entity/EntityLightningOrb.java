@@ -7,8 +7,6 @@ import cpw.mods.fml.relauncher.Side;
 
 import Jimmynator.common.Jimmynator;
 import Jimmynator.common.network.PacketSpawnItem;
-import Jimmynator.common.network.PacketSpawnItemInClient;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;

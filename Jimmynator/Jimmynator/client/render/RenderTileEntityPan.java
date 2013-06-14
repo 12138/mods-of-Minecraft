@@ -1,6 +1,5 @@
 package Jimmynator.client.render;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
@@ -23,8 +22,7 @@ public class RenderTileEntityPan extends TileEntitySpecialRenderer {
 	renderItemInPan((TileEntityPan)tileentity,d0,d1,d2,f);
 	}
 
-	private void renderItemInPan(TileEntityPan tileentity, double d0,
-			double d1, double d2, float f) {
+	private void renderItemInPan(TileEntityPan tileentity, double d0,double d1, double d2, float f) {
 		GL11.glPushMatrix();
 	  GL11.glTranslatef((float)d0 + 0.5F, (float)d1-0.5F+2, (float)d2 + 0.5F);
 if(tileentity.inPan!=null){
@@ -37,8 +35,7 @@ if(tileentity.inPan!=null){
 		
 	}
 
-	private void renderPan(TileEntityPan tileentity, double d0, double d1,
-			double d2, float f) {
+	private void renderPan(TileEntityPan tileentity, double d0, double d1,double d2, float f) {
 
 		
 		GL11.glPushMatrix();

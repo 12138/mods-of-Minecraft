@@ -31,6 +31,10 @@ public class PacketHandler implements IPacketHandler {
 							extradata);
 				
 					break;
+				case 5:
+					PacketPan.instance.readServer(id, dat,
+							extradata);
+					break;
 	
 			}
 			break;
@@ -45,13 +49,7 @@ public class PacketHandler implements IPacketHandler {
 					PacketSpawnLighting.instance.readClient(id, dat,
 							extradata);
 					break;
-				case 4:
-					PacketSpawnItemInClient.instance.readClient(id, dat,
-							extradata);
-					break;
-				case 5:
-					PacketPan.instance.readServer(id, dat,
-							extradata);
+				
 			
 			
 			}

@@ -47,9 +47,9 @@ public class EntityStaffLifeball extends EntityStaffBall {
 	        if (d5 <= 5.0D)
 	        {
 	          if (entity.isEntityUndead())
-	          	entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 20);
+	          	entity.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 10);
 	          else
-	          	entity.heal(20);
+	          	entity.heal(10);
 	            
 	        }
 	      }

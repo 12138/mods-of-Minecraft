@@ -1,15 +1,16 @@
 package Jimmynator.client;
 
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import Jimmynator.client.render.RenderHourse;
-import Jimmynator.client.render.RenderShuriken;
 import Jimmynator.client.render.RenderStaffBall;
 import Jimmynator.client.render.RenderTileEntityOrb;
 import Jimmynator.client.render.RenderTileEntityPan;
 import Jimmynator.client.render.RenderTomahawk;
 import Jimmynator.client.render.model.ModelHorse;
 import Jimmynator.common.CommonProxy;
+import Jimmynator.common.Jimmynator;
 import Jimmynator.common.block.tileentity.TileEntityOrb;
 import Jimmynator.common.block.tileentity.TileEntityPan;
 import Jimmynator.common.entity.EntityHorse;
@@ -29,7 +30,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityStaffIceball.class, new RenderStaffBall());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStaffLifeball.class, new RenderStaffBall());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStaffDeathball.class, new RenderStaffBall());
-		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class, new RenderShuriken());
+		RenderingRegistry.registerEntityRenderingHandler(EntityShuriken.class, new RenderSnowball(Jimmynator.shuriken));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, new RenderHourse(new ModelHorse(), 0.7F));
 		//ClientRegistry.registerTileEntity(TileEntityOrb.class, "tileentityorb", new RenderTileEntityOrb());
 ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOrb.class, new RenderTileEntityOrb());

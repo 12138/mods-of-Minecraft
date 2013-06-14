@@ -1,8 +1,6 @@
 package Jimmynator.common;
 
 
-import java.lang.ProcessBuilder.Redirect;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,15 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import Jimmynator.common.block.BlockAir;
 import Jimmynator.common.block.BlockAnvil;
-import Jimmynator.common.block.BlockMethane;
 import Jimmynator.common.block.BlockNetherOrb;
 import Jimmynator.common.block.BlockOmelette;
 import Jimmynator.common.block.BlockOrb;
@@ -54,6 +49,8 @@ import Jimmynator.common.item.mage.ItemStaff;
 import Jimmynator.common.item.ninja.ItemShuriken;
 import Jimmynator.common.item.ninja.ItemSmokeGrenade;
 import Jimmynator.common.network.PacketHandler;
+import Jimmynator.common.world.WorldGenerator;
+import cpw.mods.fml.common.IFuelHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -70,12 +67,12 @@ import cpw.mods.fml.relauncher.Side;
 
 @NetworkMod(serverSideRequired = false, clientSideRequired = true,packetHandler=PacketHandler.class,channels={"Jimmynator"})
 @Mod(modid = "Jimmynator", name = "Jimmynator", version = "2.5.0")
-public class Jimmynator {
+public class Jimmynator implements IFuelHandler {
 	public static final EnumArmorMaterial KNIGHT = EnumHelper.addArmorMaterial("KNIGHT", 33, new int[] { 5, 15, 10, 5 }, 30);
 	  public static final EnumArmorMaterial GRIM = EnumHelper.addArmorMaterial("GRIM", -1, new int[] { 0, 0, 0, 0 }, 30);
 	  public static final EnumToolMaterial ETHER = EnumHelper.addToolMaterial("ETHER", 3, 3122, 15.0F, 9, 30);
 	  public static final EnumToolMaterial NETHER = EnumHelper.addToolMaterial("NETHER", 3, 2341, 15.0F, 10, 5);
-	  public static final EnumToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 635, 15.0F, 100, 15);
+	  public static final EnumToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 635, 15.0F, 14, 15);
 	//item
 	public static Item woodHammer;
 	public static Item stoneHammer;
@@ -196,7 +193,6 @@ public class Jimmynator {
 	public static Block air;
 	public static Block pan;
 	public static Block blockAnvil;
-	public static Block methane;
 	
 	public static int woodHammerId;
 	public static int stoneHammerId;
@@ -204,9 +200,7 @@ public class Jimmynator {
 	public static int goldHammerId;
 	public static int diamondHammerId;
 	
-
 	
-		
 	public static int orbId;
 	public static int fireOrbId;
 	public static int iceOrbId;
@@ -316,10 +310,9 @@ public class Jimmynator {
 	public static int airId;
 	public static int panId;
 	public static int blockAnvilId;
-	public static int methaneId;
 
 	 //CreativeTabs 
-		public static CreativeTabs tabJimmynator	= new CreativeTabJimmynator(CreativeTabs.getNextID(),"Jimmynator");
+		public static CreativeTabs tabJimmynator = new CreativeTabJimmynator(CreativeTabs.getNextID(),"Jimmynator");
 		@Mod.Instance("Jimmynator")
 		public static Jimmynator instance;
 
@@ -442,12 +435,12 @@ public class Jimmynator {
 		 airId=config.getBlock("Block air", 1241).getInt();
 		 panId=config.getBlock("Block pan", 1242).getInt();
 		 blockAnvilId=config.getBlock("Block anvil", 1243).getInt();
-	    methaneId=config.getBlock("Blockddil", 1244).getInt();
+	
 		config.save();
 	}
 	@Init
 	public void InitMod(FMLInitializationEvent event){
-
+MinecraftForge.EVENT_BUS.register(new EventHandler());
 //EntityRegistry.registerModEntity(EntityTomahawk.class, "tomahawk", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 //EntityRegistry.registerModEntity(EntityStaffFireball.class, "fireball", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
 //EntityRegistry.registerModEntity(EntityStaffIceball.class, "iceball", EntityRegistry.findGlobalUniqueEntityId(), this, 128, 1, true);
@@ -570,14 +563,13 @@ public class Jimmynator {
 	   Block.blocksList[Block.sponge.blockID]=null;
 	   Block.blocksList[Block.sponge.blockID]=sponge;
 	   pan=new BlockPan(panId).setUnlocalizedName("pan");
-	   methane=new BlockMethane(methaneId, Material.air).setUnlocalizedName("methane");
       blockAnvil=new BlockAnvil(blockAnvilId, Material.rock).setUnlocalizedName("blockAnvil");
 	  GameRegistry.registerTileEntity(TileEntityOrb.class, "tileentityorb");
 	  GameRegistry.registerTileEntity(TileEntityPan.class, "tileentitypan");
 	  GameRegistry.registerWorldGenerator(new WorldGenerator());
 	  int redColor = (255 << 16);
 	    int orangeColor = (255 << 16)+ (200 << 8);
-	  EntityRegistry.registerGlobalEntityID(EntityHorse.class, "hourse", 21,redColor,orangeColor);
+	  EntityRegistry.registerGlobalEntityID(EntityHorse.class, "hourse", EntityRegistry.findGlobalUniqueEntityId(),redColor,orangeColor);
 	  EntityRegistry.addSpawn(EntityHorse.class, 20, 0, 10, EnumCreatureType.creature, BiomeGenBase.plains);
 	  NetworkRegistry.instance().registerGuiHandler(this, proxy);
 		
@@ -715,7 +707,7 @@ public class Jimmynator {
 	private void initRepice() {
 		 GameRegistry.addShapedRecipe(new ItemStack(Block.ice), new Object[] { "XXX", "XXX", "XXX", Character.valueOf('X'), Block.blockSnow });
 
-		    GameRegistry.addShapedRecipe(new ItemStack(woodHammer, 1), new Object[] { " XX", "//X", " XX", Character.valueOf('/'),Item.stick, Character.valueOf('X'), Block.wood });
+		    GameRegistry.addShapedRecipe(new ItemStack(woodHammer, 1), new Object[] { " XX", "//X", " XX", Character.valueOf('/'),Item.stick, Character.valueOf('X'), Block.planks });
 
 		    GameRegistry.addShapedRecipe(new ItemStack(stoneHammer, 1), new Object[] { " XX", "//X", " XX", Character.valueOf('/'), Item.stick, Character.valueOf('X'), Block.cobblestone });
 
@@ -735,7 +727,7 @@ public class Jimmynator {
 
 		    GameRegistry.addShapedRecipe(new ItemStack(orb, 4), new Object[] { " X ", "X X", " X ", Character.valueOf('X'), Block.glass });
 
-		    GameRegistry.addShapedRecipe(new ItemStack(bat, 1), new Object[] { "  X", " X ", "/  ", Character.valueOf('/'), Item.stick, Character.valueOf('X'), Block.wood});
+		    GameRegistry.addShapedRecipe(new ItemStack(bat, 1), new Object[] { "  X", " X ", "/  ", Character.valueOf('/'), Item.stick, Character.valueOf('X'), Block.planks});
 
 		    GameRegistry.addShapedRecipe(new ItemStack(blockAnvil, 1), new Object[] { "XXX", " X ", "XXX", Character.valueOf('X'), Item.ingotIron });
 
@@ -780,6 +772,7 @@ public class Jimmynator {
 		    GameRegistry.addSmelting(Block.slowSand.blockID, new ItemStack(Jimmynator.soul), 0.1F);
 //		    GameRegistry.addSmelting(Item.egg.itemID, new ItemStack(Jimmynator.), 0.1F);
 		    GameRegistry.addSmelting(Jimmynator.etherealPowder.itemID, new ItemStack(Jimmynator.etherealIngot), 0.1F);
+	GameRegistry.registerFuelHandler(this);
 	}
 	private void registerBlockAndItsName(Block block, String en,String ch) {
 		GameRegistry.registerBlock(block, block.getUnlocalizedName());
@@ -791,6 +784,13 @@ public class Jimmynator {
 		GameRegistry.registerItem(item, item.getUnlocalizedName(), "Jimmynator");
 		LanguageRegistry.instance().addNameForObject(item, "en_US", en);
 		LanguageRegistry.instance().addNameForObject(item, "zh_CN", ch);
+	}
+	@Override
+	public int getBurnTime(ItemStack fuel) {
+		if(fuel.itemID == nethercoal.itemID)
+			return 1000;
+			else
+			return 0;
 	}
 
 }

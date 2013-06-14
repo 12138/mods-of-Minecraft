@@ -18,7 +18,8 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 public class ItemMechanicBow extends ItemBow {
 	 public static final String[] mechanicBowPullIconNameArray = new String[] {"mechanicBow_pull_0","mechanicBow_pull_1", "mechanicBow_pull_2", "mechanicBow_pull_3"};
 	    @SideOnly(Side.CLIENT)
-	    private Icon[] iconArray; 
+	    private Icon[] iconArray;
+	    private double damage=2; 
 
 	public ItemMechanicBow(int par1) {
 		super(par1);
@@ -44,7 +45,7 @@ public class ItemMechanicBow extends ItemBow {
 
 	        if (flag || (Jimmynator.proxy.isEquid(par3EntityPlayer, "archer")&&par3EntityPlayer.inventory.hasItem(Item.arrow.itemID)))
 	        {
-	            float f = (float)j / 20.0F;
+	            float f = (float)j / 6.0F;
 	            f = (f * f + f * 2.0F) / 3.0F;
 
 	            if ((double)f < 0.1D)
@@ -65,7 +66,7 @@ public class ItemMechanicBow extends ItemBow {
 	            }
 
 	            
-	             entityarrow.setDamage(entityarrow.getDamage() *0.75D);
+	             entityarrow.setDamage(this.damage);
 	           
 	            par1ItemStack.damageItem(1, par3EntityPlayer);
 	            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -94,10 +95,10 @@ public class ItemMechanicBow extends ItemBow {
 			if(count>0){
 				this.iconIndex=this.iconArray[1];
 				}
-					if(count>6){
+					if(count>3){
 				this.iconIndex=this.iconArray[2];
 				}
-					if(count>9){
+					if(count>6){
 				this.iconIndex=this.iconArray[3];
 				}
 			
@@ -105,16 +106,13 @@ public class ItemMechanicBow extends ItemBow {
 
 	@Override
 	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
-		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
-this.iconchange(count);
+		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+			int j = this.getMaxItemUseDuration(stack) - count;
+			this.iconchange(j);
+		}
 		super.onUsingItemTick(stack, player, count);
 	}
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		
-		return 36000;
-	}
 
 	@Override
 	public int getItemEnchantability() {

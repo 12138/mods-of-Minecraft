@@ -99,7 +99,8 @@ public class ItemHammer extends ItemTool {
 	        double d5 = entity.getDistanceToEntity(par3EntityPlayer);
 	        if (d5 <= 8.0D)
 	        {
-	          par1ItemStack.damageItem(this.weaponDamage, par3EntityPlayer);
+	          par1ItemStack.damageItem(2, par3EntityPlayer);
+	          entity.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityPlayer), this.weaponDamage/2);
 //	          hitEntity(par1ItemStack, entity, par3EntityPlayer);
 //	          EntityLightningBolt lighting=new EntityLightningBolt(par2World, entity.posX, entity.posY, entity.posZ);
 //	          par2World.spawnEntityInWorld(lighting);

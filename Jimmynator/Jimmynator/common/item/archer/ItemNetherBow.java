@@ -18,7 +18,8 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 public class ItemNetherBow extends ItemBow {
 	 public static final String[] netherBowPullIconNameArray = new String[] {"netherBow_pull_0","netherBow_pull_1", "netherBow_pull_2", "netherBow_pull_3"};
 	    @SideOnly(Side.CLIENT)
-	    private Icon[] iconArray; 
+	    private Icon[] iconArray;
+		private double damage=6; 
 
 	public ItemNetherBow(int par1) {
 		super(par1);
@@ -28,6 +29,7 @@ public class ItemNetherBow extends ItemBow {
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer, int par4) {
+		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
 		this.iconsetdefalut();
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
@@ -43,7 +45,7 @@ public class ItemNetherBow extends ItemBow {
 
 	        if (flag || (Jimmynator.proxy.isEquid(par3EntityPlayer, "archer")&&par3EntityPlayer.inventory.hasItem(Item.arrow.itemID)))
 	        {
-	            float f = (float)j / 20.0F;
+	            float f = (float)j / 40.0F;
 	            f = (f * f + f * 2.0F) / 3.0F;
 
 	            if ((double)f < 0.1D)
@@ -73,9 +75,9 @@ public class ItemNetherBow extends ItemBow {
 	            entityarrow2.setFire(100);
 	            entityarrow3.setFire(100);
 	            
-	             entityarrow1.setDamage(entityarrow1.getDamage());
-	             entityarrow2.setDamage(entityarrow2.getDamage());
-	             entityarrow3.setDamage(entityarrow3.getDamage());
+	             entityarrow1.setDamage(this.damage);
+	             entityarrow2.setDamage(this.damage);
+	             entityarrow3.setDamage(this.damage);
 	           
 	            par1ItemStack.damageItem(2, par3EntityPlayer);
 	            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -114,7 +116,7 @@ public class ItemNetherBow extends ItemBow {
 						if(count>19){
 					this.iconIndex=this.iconArray[2];
 					}
-						if(count>27){
+						if(count>40){
 					this.iconIndex=this.iconArray[3];
 					}
 				
@@ -122,17 +124,15 @@ public class ItemNetherBow extends ItemBow {
 
 	@Override
 	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
-		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
-			this.iconchange(count);
+			if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+				int j = this.getMaxItemUseDuration(stack) - count;
+				this.iconchange(j);
+			}
+	
 		
 		super.onUsingItemTick(stack, player, count);
 	}
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		
-		return 108000;
-	}
 
 	@Override
 	public int getItemEnchantability() {

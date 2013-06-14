@@ -45,7 +45,12 @@ public abstract class EntityStaffBall extends Entity implements IProjectile{
 	}
 	
 
-
+	 public boolean isInRangeToRenderDist(double par1)
+	    {
+	        double d1 = this.boundingBox.getAverageEdgeLength() * 4.0D;
+	        d1 *= 64.0D;
+	        return par1 < d1 * d1;
+	    }
 	
 	public int getAttribute() {
 		return attribute;

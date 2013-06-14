@@ -19,7 +19,7 @@ public class ItemEtherBow extends ItemBow {
 	 public static final String[] etherBowPullIconNameArray = new String[] {"etherBow_pull_0","etherBow_pull_1", "etherBow_pull_2", "etherBow_pull_3"};
 	    @SideOnly(Side.CLIENT)
 	    private Icon[] iconArray; 
-
+	    private double damage=10; 
 	public ItemEtherBow(int par1) {
 		super(par1);
 		this.setMaxDamage(3122);
@@ -37,10 +37,10 @@ public class ItemEtherBow extends ItemBow {
 			 if(count>0){
 					this.iconIndex=this.iconArray[1];
 					}
-						if(count>20*3){
+						if(count>20){
 					this.iconIndex=this.iconArray[2];
 					}
-						if(count>20*5){
+						if(count>30){
 					this.iconIndex=this.iconArray[3];
 					}
 				
@@ -48,6 +48,7 @@ public class ItemEtherBow extends ItemBow {
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer, int par4) {
+		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
 		this.iconsetdefalut();
 		int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
@@ -84,7 +85,7 @@ public class ItemEtherBow extends ItemBow {
 	            }
 
 	            
-	             entityarrow.setDamage(entityarrow.getDamage() *2.0D);
+	             entityarrow.setDamage(this.damage);
 	           
 	            par1ItemStack.damageItem(2, par3EntityPlayer);
 	            par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -104,16 +105,15 @@ public class ItemEtherBow extends ItemBow {
 
 	@Override
 	public void onUsingItemTick(ItemStack stack, EntityPlayer player, int count) {
-		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT)
-			this.iconchange(count);
+		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+			if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+				int j = this.getMaxItemUseDuration(stack) - count;
+				this.iconchange(j);
+			}
+			}
 		super.onUsingItemTick(stack, player, count);
 	}
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-		
-		return 144000;
-	}
 
 	@Override
 	public int getItemEnchantability() {
