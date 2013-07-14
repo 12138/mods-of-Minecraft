@@ -86,10 +86,10 @@ public class BlockSoilMaker extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon=par1IconRegister.registerIcon("SoilMaker:SoilMakerB");
-		this.front=par1IconRegister.registerIcon("SoilMaker:SoilMakerF");
-		this.up=par1IconRegister.registerIcon("SoilMaker:SoilMakerU");
-		this.down=par1IconRegister.registerIcon("SoilMaker:SoilMakerD");
+		this.blockIcon=par1IconRegister.registerIcon("soilmaker:soilmaker0");
+		this.front=par1IconRegister.registerIcon("soilmaker:soilmaker1");
+		this.up=par1IconRegister.registerIcon("soilmaker:soilmaker2");
+		this.down=par1IconRegister.registerIcon("soilmaker:soilmaker3");
 	}
 	@Override
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)

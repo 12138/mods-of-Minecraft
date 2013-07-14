@@ -464,7 +464,7 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
             }
             if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD")) return 200;
             if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD")) return 200;
-            if (var2 instanceof ItemHoe && ((ItemHoe) var2).getMaterialName().equals("WOOD")) return 200;
+//            if (var2 instanceof ItemHoe && ((ItemHoe) var2).getMaterialName().equals("WOOD")) return 200;
             if (var1 == Item.stick.itemID) return 100;
             if (var1 == Item.coal.itemID) return 1600;
             if (var1 == Item.bucketLava.itemID) return 20000;
@@ -480,9 +480,10 @@ public class TileEntitySoilMaker extends TileEntity implements IInventory{
 	        return getItemBurnTime(par0ItemStack) > 0;
 	    }
 
+	
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		
 		return false;
 	}
 
