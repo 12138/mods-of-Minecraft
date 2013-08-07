@@ -146,82 +146,82 @@ public class FireItemColor extends Item {
     	
 		if(damage==0){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillRed.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillRed.blockID, 0, 2);
 		}
 		if(damage==1){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillGreen.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillGreen.blockID, 0, 2);
 			
 		}
 		if(damage==2){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillBlue.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillBlue.blockID, 0, 2);
 			
 		}
 		if(damage==3){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillBlack.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillBlack.blockID, 0, 2);
 			
 		}
 		if(damage==4){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillBrown.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillBrown.blockID, 0, 2);
 			
 		}
 		if(damage==5){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillCyan.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillCyan.blockID, 0, 2);
 			
 		}
 		if(damage==6){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillGray.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillGray.blockID, 0, 2);
 			
 		}
 		if(damage==7){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillLIGHTBLUE.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillLIGHTBLUE.blockID, 0, 2);
 			
 		}
 		if(damage==8){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillLime.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillLime.blockID, 0, 2);
 			
 		}
 		if(damage==9){
 			
-				world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillMagenta.blockID, 0, 2);
+				world.setBlock(x, y, z, FireGrass.fireWaterStillMagenta.blockID, 0, 2);
 			
 		}
 			if(x==10){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillOrange.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillOrange.blockID, 0, 2);
 				
 			}
 			
 			if(damage==11){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillPink.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillPink.blockID, 0, 2);
 				
 			}
 			if(damage==12){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillPurple.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillPurple.blockID, 0, 2);
 				
 			}
 			if(damage==13){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillSilver.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillSilver.blockID, 0, 2);
 				
 			}
 			if(damage==14){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillWhite.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillWhite.blockID, 0, 2);
 				
 			}
 			if(damage==15){
 				
-					world.setBlockAndMetadataWithNotify(x, y, z, FireGrass.fireWaterStillYellow.blockID, 0, 2);
+					world.setBlock(x, y, z, FireGrass.fireWaterStillYellow.blockID, 0, 2);
 				
 			}
 	}
@@ -244,13 +244,13 @@ public class FireItemColor extends Item {
     }
     @Override
     @SideOnly(Side.CLIENT)
-    public void func_94581_a(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)
     {
         this.icons = new Icon[kind.length];
 
         for (int i = 0; i < kind.length; ++i)
         {
-            this.icons[i] = par1IconRegister.func_94245_a(FireGrass.ModName+":"+kind[i]);
+            this.icons[i] = par1IconRegister.registerIcon(FireGrass.ModName+":"+kind[i]);
         }
     }
 

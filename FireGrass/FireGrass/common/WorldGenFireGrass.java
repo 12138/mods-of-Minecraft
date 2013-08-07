@@ -37,7 +37,7 @@ public class WorldGenFireGrass implements IWorldGenerator {
 					for (int var11 = 0; var11 < var10; ++var11) {
 						if (FireGrass.fireGrass.canBlockStay(par1World, var7,
 								var8 + var11, var9)) {
-							par1World.setBlockAndMetadataWithNotify(var7, var8 + var11, var9,
+							par1World.setBlock(var7, var8 + var11, var9,
 									FireGrass.fireGrass.blockID,0,3);
 						}
 					}

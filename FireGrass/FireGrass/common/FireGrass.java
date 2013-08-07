@@ -13,7 +13,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@NetworkMod(serverSideRequired = false, clientSideRequired = true)
+@NetworkMod(serverSideRequired = true, clientSideRequired = true)
 @Mod(modid = "FireGrass", name = "FireGrass", version = "1.0.0")
 public class FireGrass {
 
@@ -108,7 +108,7 @@ public class FireGrass {
 	public static FireBlockFluid fireWaterStillGray;
 	public static int fireWaterStillGrayID;
 
-	public static String ModName = "FireGrass";
+	public static String ModName = "firegrass";
 	// CreativeTabs
 	public static CreativeTabs FireGrass = new CreativeTabCooker("FireGrass");
 
@@ -118,7 +118,7 @@ public class FireGrass {
 	@SidedProxy(clientSide = "FireGrass.client.ClientProxy", serverSide = "FireGrass.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	@Mod.PreInit
+	@Mod.EventHandler
 	public void preLoad(FMLPreInitializationEvent event) {
 		final Configuration config = new Configuration(
 				event.getSuggestedConfigurationFile());
@@ -178,11 +178,6 @@ public class FireGrass {
 		fireWaterStillGrayID = config.getBlock("fireWaterStillGray", 1031).getInt();
 
 		config.save();
-
-	}
-
-	@Mod.Init
-	public void onLoad(FMLInitializationEvent event) {
 		fireGrassFruit = new FireItem(fireGrassFruitID).setUnlocalizedName("fireGrassFruit").setCreativeTab(FireGrass);
 
 		fireGrass = new FireBlockGrass(fireGrassID).setUnlocalizedName("fireGrass").setCreativeTab(FireGrass);
@@ -236,55 +231,6 @@ public class FireGrass {
 
 		fireWaterMovingGray = (FireBlockFluid) new FireBlockFlowing(fireWaterMovingGrayID, ColorList.GRAY).setUnlocalizedName("fireWaterMovingGray");
 		fireWaterStillGray = (FireBlockFluid) new FireBlockStationary(fireWaterStillGrayID, ColorList.GRAY).setUnlocalizedName("fireWaterStillGray");
-
-		GameRegistry.registerBlock(fireGrass, "fireGrass");
-		GameRegistry.registerBlock(fireWaterMovingRed, "fireWaterMovingRed");
-		GameRegistry.registerBlock(fireWaterStillRed, "fireWaterStillRed");
-
-		GameRegistry.registerBlock(fireWaterStillGreen, "fireWaterStillGreen");
-		GameRegistry.registerBlock(fireWaterMovingGreen, "fireWaterMovingGreen");
-
-		GameRegistry.registerBlock(fireWaterStillBlue, "fireWaterStillBlue");
-		GameRegistry.registerBlock(fireWaterMovingBlue, "fireWaterMovingBlue");
-
-		GameRegistry.registerBlock(fireWaterStillBlack, "fireWaterStillBlack");
-		GameRegistry.registerBlock(fireWaterMovingBlack, "fireWaterMovingBlack");
-
-		GameRegistry.registerBlock(fireWaterStillBrown, "fireWaterStillBrown");
-		GameRegistry.registerBlock(fireWaterMovingBrown, "fireWaterMovingBrown");
-
-		GameRegistry.registerBlock(fireWaterStillCyan, "fireWaterStillCyan");
-		GameRegistry.registerBlock(fireWaterMovingCyan, "fireWaterMovingCyan");
-
-		GameRegistry.registerBlock(fireWaterStillLIGHTBLUE,"fireWaterStillLIGHTBLUE");
-		GameRegistry.registerBlock(fireWaterMovingLIGHTBLUE,"fireWaterMovingLIGHTBLUE");
-
-		GameRegistry.registerBlock(fireWaterStillLime, "fireWaterStillLime");
-		GameRegistry.registerBlock(fireWaterMovingLime, "fireWaterMovingLime");
-
-		GameRegistry.registerBlock(fireWaterStillMagenta,"fireWaterStillMagenta");
-		GameRegistry.registerBlock(fireWaterMovingMagenta,"fireWaterMovingMagenta");
-
-		GameRegistry.registerBlock(fireWaterStillOrange, "fireWaterStillOrange");
-		GameRegistry.registerBlock(fireWaterMovingOrange,"fireWaterMovingOrange");
-
-		GameRegistry.registerBlock(fireWaterStillPink, "fireWaterStillPink");
-		GameRegistry.registerBlock(fireWaterMovingPink, "fireWaterMovingPink");
-
-		GameRegistry.registerBlock(fireWaterStillPurple, "fireWaterStillPurple");
-		GameRegistry.registerBlock(fireWaterMovingPurple,"fireWaterMovingPurple");
-
-		GameRegistry.registerBlock(fireWaterStillSilver, "fireWaterStillSilver");
-		GameRegistry.registerBlock(fireWaterMovingSilver,"fireWaterMovingSilver");
-
-		GameRegistry.registerBlock(fireWaterStillWhite, "fireWaterStillWhite");
-		GameRegistry.registerBlock(fireWaterMovingWhite, "fireWaterMovingWhite");
-
-		GameRegistry.registerBlock(fireWaterStillYellow, "fireWaterStillYellow");
-		GameRegistry.registerBlock(fireWaterMovingYellow,"fireWaterMovingYellow");
-
-		GameRegistry.registerBlock(fireWaterStillGray, "fireWaterStillGray");
-		GameRegistry.registerBlock(fireWaterMovingGray, "fireWaterMovingGray");
 
 		LanguageRegistry.instance().addNameForObject(fireGrass, "en_US","Fire Glass");
 		LanguageRegistry.instance().addNameForObject(fireGrass, "zh_CN","荧光草");
@@ -345,6 +291,62 @@ public class FireGrass {
 		
 		LanguageRegistry.instance().addNameForObject(fireGrassBottleColor,"en_US", "Color Bottle");
 		LanguageRegistry.instance().addNameForObject(fireGrassBottleColor,"zh_CN", "染剂瓶");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.FireGrass","zh_CN", "荧光草");
+	}
+
+	@Mod.EventHandler
+	public void onLoad(FMLInitializationEvent event) {
+		
+
+		GameRegistry.registerBlock(fireGrass, "fireGrass");
+		GameRegistry.registerBlock(fireWaterMovingRed, "fireWaterMovingRed");
+		GameRegistry.registerBlock(fireWaterStillRed, "fireWaterStillRed");
+
+		GameRegistry.registerBlock(fireWaterStillGreen, "fireWaterStillGreen");
+		GameRegistry.registerBlock(fireWaterMovingGreen, "fireWaterMovingGreen");
+
+		GameRegistry.registerBlock(fireWaterStillBlue, "fireWaterStillBlue");
+		GameRegistry.registerBlock(fireWaterMovingBlue, "fireWaterMovingBlue");
+
+		GameRegistry.registerBlock(fireWaterStillBlack, "fireWaterStillBlack");
+		GameRegistry.registerBlock(fireWaterMovingBlack, "fireWaterMovingBlack");
+
+		GameRegistry.registerBlock(fireWaterStillBrown, "fireWaterStillBrown");
+		GameRegistry.registerBlock(fireWaterMovingBrown, "fireWaterMovingBrown");
+
+		GameRegistry.registerBlock(fireWaterStillCyan, "fireWaterStillCyan");
+		GameRegistry.registerBlock(fireWaterMovingCyan, "fireWaterMovingCyan");
+
+		GameRegistry.registerBlock(fireWaterStillLIGHTBLUE,"fireWaterStillLIGHTBLUE");
+		GameRegistry.registerBlock(fireWaterMovingLIGHTBLUE,"fireWaterMovingLIGHTBLUE");
+
+		GameRegistry.registerBlock(fireWaterStillLime, "fireWaterStillLime");
+		GameRegistry.registerBlock(fireWaterMovingLime, "fireWaterMovingLime");
+
+		GameRegistry.registerBlock(fireWaterStillMagenta,"fireWaterStillMagenta");
+		GameRegistry.registerBlock(fireWaterMovingMagenta,"fireWaterMovingMagenta");
+
+		GameRegistry.registerBlock(fireWaterStillOrange, "fireWaterStillOrange");
+		GameRegistry.registerBlock(fireWaterMovingOrange,"fireWaterMovingOrange");
+
+		GameRegistry.registerBlock(fireWaterStillPink, "fireWaterStillPink");
+		GameRegistry.registerBlock(fireWaterMovingPink, "fireWaterMovingPink");
+
+		GameRegistry.registerBlock(fireWaterStillPurple, "fireWaterStillPurple");
+		GameRegistry.registerBlock(fireWaterMovingPurple,"fireWaterMovingPurple");
+
+		GameRegistry.registerBlock(fireWaterStillSilver, "fireWaterStillSilver");
+		GameRegistry.registerBlock(fireWaterMovingSilver,"fireWaterMovingSilver");
+
+		GameRegistry.registerBlock(fireWaterStillWhite, "fireWaterStillWhite");
+		GameRegistry.registerBlock(fireWaterMovingWhite, "fireWaterMovingWhite");
+
+		GameRegistry.registerBlock(fireWaterStillYellow, "fireWaterStillYellow");
+		GameRegistry.registerBlock(fireWaterMovingYellow,"fireWaterMovingYellow");
+
+		GameRegistry.registerBlock(fireWaterStillGray, "fireWaterStillGray");
+		GameRegistry.registerBlock(fireWaterMovingGray, "fireWaterMovingGray");
+
 		GameRegistry.registerWorldGenerator(new WorldGenFireGrass());
 		recipes();
 		proxy.onLoad();

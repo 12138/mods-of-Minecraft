@@ -14,8 +14,8 @@ private String UnocalizedName;
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister) {
-		this.iconIndex=par1IconRegister.func_94245_a(FireGrass.ModName+":"+this.UnocalizedName);
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.itemIcon=par1IconRegister.registerIcon(FireGrass.ModName+":"+this.UnocalizedName);
 	}
 
 	@Override
