@@ -2,6 +2,7 @@ package CookerCraft.common;
 
 import java.util.Random;
 
+import CookerCraft.common.utils.InitItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class CookerEventHandler {
 	  if(blockid==Block.reed.blockID&&event.action==PlayerInteractEvent.Action.LEFT_CLICK_BLOCK){
 		  Random ran =new Random();
 		  if(ran.nextInt(15)==0){
-		   EntityItem item= new EntityItem(world, x, y+ran.nextInt(1), z, new ItemStack(CookerCraft.wildRice,1));
+		   EntityItem item= new EntityItem(world, x, y+ran.nextInt(1), z, new ItemStack(InitItem.wildRice,1));
 		  world.spawnEntityInWorld(item);
 		  }
 			  

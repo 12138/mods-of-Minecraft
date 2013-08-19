@@ -1,5 +1,9 @@
-package CookerCraft.common;
+package CookerCraft.common.block;
 
+import CookerCraft.common.CookerCraft;
+import CookerCraft.common.item.CookerItem;
+import CookerCraft.common.utils.Config;
+import CookerCraft.common.utils.InitBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +14,8 @@ public class CookerItemBamboow extends CookerItem {
 	private int spawnID;
 	public CookerItemBamboow(int par1) {
 		super(par1);
-		this.spawnID = CookerCraft.blockbamboowID;
+		this.spawnID = Config.blockbamboowID;
+		this.setCreativeTab(CookerCraft.tabCookerCraft);
 	}
 	
 	@Override
@@ -68,14 +73,14 @@ public class CookerItemBamboow extends CookerItem {
             if (par3World.canPlaceEntityOnSide(this.spawnID, par4, par5, par6, false, par7, (Entity)null, par1ItemStack))
             {
                 Block var12 = Block.blocksList[this.spawnID];
-                int var13 = CookerCraft.blockBamboow.onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
+                int var13 = InitBlock.blockBamboow.onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
 
                 if (par3World.setBlock(par4, par5, par6, this.spawnID, var13,3))
                 {
                     if (par3World.getBlockId(par4, par5, par6) == this.spawnID)
                     {
-                       CookerCraft.blockBamboow.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
-                       CookerCraft.blockBamboow.onPostBlockPlaced(par3World, par4, par5, par6, var13);
+                       InitBlock.blockBamboow.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
+                       InitBlock.blockBamboow.onPostBlockPlaced(par3World, par4, par5, par6, var13);
                     }
 
                     par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), var12.stepSound.getPlaceSound(), (var12.stepSound.getVolume() + 1.0F) / 2.0F, var12.stepSound.getPitch() * 0.8F);

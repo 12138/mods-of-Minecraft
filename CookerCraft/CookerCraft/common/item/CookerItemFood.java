@@ -1,5 +1,6 @@
-package CookerCraft.common;
+package CookerCraft.common.item;
 
+import CookerCraft.common.CookerCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -10,14 +11,14 @@ public class CookerItemFood extends ItemFood {
 	private String UnocalizedName;
 	public CookerItemFood(int par1, int par2, boolean par3) {
 		super(par1, par2,par3);
-		// TODO Auto-generated constructor stub
+		this.setCreativeTab(CookerCraft.tabCookerCraft);
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-        this.itemIcon = par1IconRegister.registerIcon(CookerCraft.ModName+":"+this.UnocalizedName);
+        this.itemIcon = par1IconRegister.registerIcon(CookerCraft.ModId+":"+this.UnocalizedName);
 	}
 
 	@Override

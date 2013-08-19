@@ -2,8 +2,8 @@ package CookerCraft.common;
 
 import java.util.Random;
 
+import CookerCraft.common.utils.InitBlock;
 import cpw.mods.fml.common.IWorldGenerator;
-
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -22,10 +22,10 @@ public class WorldGenBamboow implements IWorldGenerator {
 			if (par1World.isAirBlock(var7, var8, var9)) {
 				int var10 = 2 + par2Random.nextInt(par2Random.nextInt(3) + 1);
 				for (int var11 = 0; var11 < var10; ++var11) {
-					if (CookerCraft.blockBamboow.canBlockStay(par1World, var7,
+					if (InitBlock.blockBamboow.canBlockStay(par1World, var7,
 							var8 + var11, var9)) {
 						par1World.setBlock(var7, var8 + var11, var9,
-								CookerCraft.blockBamboow.blockID,0,3);
+								InitBlock.blockBamboow.blockID,0,3);
 					}
 				}
 			}

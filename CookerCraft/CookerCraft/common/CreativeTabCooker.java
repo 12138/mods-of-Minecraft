@@ -1,5 +1,6 @@
 package CookerCraft.common;
 
+import CookerCraft.common.utils.InitItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +16,7 @@ public class CreativeTabCooker extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
 		
-		return CookerCraft.tastyBread;
+		return InitItem.tastyBread;
 	}
 
 }
