@@ -1,10 +1,11 @@
-package CookerCraft.common.block;
+package cookercraft.common.blocks;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import CookerCraft.common.CookerCraft;
-import CookerCraft.common.utils.InitItem;
+import cookercraft.common.CookerCraft;
+import cookercraft.common.misc.InitItem;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockCrops;
@@ -94,7 +95,7 @@ public class CookerBlockWildRich extends BlockCrops {
 		this.rice = new Icon[8];
 
 		for (int i = 0; i < this.rice.length; ++i) {
-			this.rice[i] = par1IconRegister.registerIcon(CookerCraft.ModId
+			this.rice[i] = par1IconRegister.registerIcon(CookerCraft.assetsName
 					+ ":paddy_" + i);
 		}
 	}

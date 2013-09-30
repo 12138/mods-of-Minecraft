@@ -1,4 +1,4 @@
-package FireGrass.common;
+package cookercraft.common.misc;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +15,7 @@ public class CreativeTabCooker extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
 		
-		return FireGrass.fireGrassFruit;
+		return InitItem.tastyBread;
 	}
 
 }

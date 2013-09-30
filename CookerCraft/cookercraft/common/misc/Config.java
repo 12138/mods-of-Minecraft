@@ -1,4 +1,4 @@
-package CookerCraft.common.utils;
+package cookercraft.common.misc;
 
 import java.io.File;
 

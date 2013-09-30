@@ -1,7 +1,6 @@
-package SoilMaker.client;
+package soilmaker.client;
 
-import SoilMaker.common.CommonProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
+import soilmaker.common.CommonProxy;
 
 
 public class ClientProxy extends CommonProxy

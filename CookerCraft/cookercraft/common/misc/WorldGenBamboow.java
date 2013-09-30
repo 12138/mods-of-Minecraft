@@ -1,8 +1,8 @@
-package CookerCraft.common;
+package cookercraft.common.misc;
 
 import java.util.Random;
 
-import CookerCraft.common.utils.InitBlock;
+
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;

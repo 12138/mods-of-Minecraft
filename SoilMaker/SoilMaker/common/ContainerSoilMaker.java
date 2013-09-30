@@ -1,4 +1,4 @@
-package SoilMaker.common;
+package soilmaker.common;
 
 import java.util.Iterator;
 

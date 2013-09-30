@@ -1,10 +1,11 @@
-package CookerCraft.common.block;
+package cookercraft.common.blocks;
 
 import java.util.Random;
 
-import CookerCraft.common.CookerCraft;
-import CookerCraft.common.utils.InitBlock;
-import CookerCraft.common.utils.InitItem;
+import cookercraft.common.CookerCraft;
+import cookercraft.common.misc.InitBlock;
+import cookercraft.common.misc.InitItem;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -146,7 +147,7 @@ public class CookerBlockBamboow extends BlockReed {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.blockIcon = par1IconRegister.registerIcon(CookerCraft.ModId
+		this.blockIcon = par1IconRegister.registerIcon(CookerCraft.assetsName
 				+ ":blockBamboow");
 	}
 

@@ -1,6 +1,6 @@
-package FireGrass.client;
+package firegrass.client;
 
-import FireGrass.common.CommonProxy;
+import firegrass.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
 	@Override

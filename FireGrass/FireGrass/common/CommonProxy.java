@@ -1,4 +1,4 @@
-package FireGrass.common;
+package firegrass.common;
 
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -15,7 +15,7 @@ public class CommonProxy {
 	
 	
 	public void registerItem(Item item) {
-		GameRegistry.registerItem(item,item.getUnlocalizedName(), "CookerCraft");
+		GameRegistry.registerItem(item,item.getUnlocalizedName(), "FireGrass");
 	}
 	
 	public static void addName(Object self, String Commonname, String chinese) {

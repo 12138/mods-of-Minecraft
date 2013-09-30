@@ -1,4 +1,4 @@
-package FireGrass.common;
+package firegrass.common.blocks;
 
 import java.util.Random;
 
@@ -9,10 +9,10 @@ import net.minecraft.world.World;
 
 public class FireBlockStationary extends FireBlockFluid {
 
-	protected FireBlockStationary(int par1,int color)
+	public FireBlockStationary(int par1,int color)
     {
         super(par1,color);
-        this.setTickRandomly(false);
+        this.setTickRandomly(true);
     }
 
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
@@ -20,10 +20,7 @@ public class FireBlockStationary extends FireBlockFluid {
         return this.blockMaterial != Material.lava;
     }
 
-    /**
-     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
-     * their own) Args: x, y, z, neighbor blockID
-     */
+   
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
@@ -62,15 +59,7 @@ public class FireBlockStationary extends FireBlockFluid {
                 par4 += par5Random.nextInt(3) - 1;
                 j1 = par1World.getBlockId(par2, par3, par4);
 
-                if (j1 == 0)
-                {
-                    if (this.isFlammable(par1World, par2 - 1, par3, par4) || this.isFlammable(par1World, par2 + 1, par3, par4) || this.isFlammable(par1World, par2, par3, par4 - 1) || this.isFlammable(par1World, par2, par3, par4 + 1) || this.isFlammable(par1World, par2, par3 - 1, par4) || this.isFlammable(par1World, par2, par3 + 1, par4))
-                    {
-                        par1World.setBlock(par2, par3, par4, Block.fire.blockID);
-                        return;
-                    }
-                }
-                else if (Block.blocksList[j1].blockMaterial.blocksMovement())
+              if (Block.blocksList[j1].blockMaterial.blocksMovement())
                 {
                     return;
                 }
@@ -81,25 +70,10 @@ public class FireBlockStationary extends FireBlockFluid {
                 i1 = par2;
                 j1 = par4;
 
-                for (int k1 = 0; k1 < 3; ++k1)
-                {
-                    par2 = i1 + par5Random.nextInt(3) - 1;
-                    par4 = j1 + par5Random.nextInt(3) - 1;
-
-                    if (par1World.isAirBlock(par2, par3 + 1, par4) && this.isFlammable(par1World, par2, par3, par4))
-                    {
-                        par1World.setBlock(par2, par3 + 1, par4, Block.fire.blockID);
-                    }
-                }
+              
             }
         }
     }
 
-    /**
-     * Checks to see if the block is flammable.
-     */
-    private boolean isFlammable(World par1World, int par2, int par3, int par4)
-    {
-        return par1World.getBlockMaterial(par2, par3, par4).getCanBurn();
-    }
+    
 }

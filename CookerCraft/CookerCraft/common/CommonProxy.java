@@ -1,4 +1,4 @@
-package CookerCraft.common;
+package cookercraft.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -10,11 +10,11 @@ public class CommonProxy {
 
 
 	public void registerItem(Item item) {
-		GameRegistry.registerItem(item, item.getUnlocalizedName(),CookerCraft.ModId);
+		GameRegistry.registerItem(item, item.getUnlocalizedName(),CookerCraft.modName);
 	}
 
 	public void registerBlock(Block block) {
-		GameRegistry.registerBlock(block, ItemBlock.class,block.getUnlocalizedName(), CookerCraft.ModId);
+		GameRegistry.registerBlock(block, ItemBlock.class,block.getUnlocalizedName(), CookerCraft.modName);
 	}
 	public void registerAndName(Object self, String Commonname, String chinese) {
 		if(self instanceof Item){

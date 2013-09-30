@@ -1,4 +1,4 @@
-package SoilMaker.common;
+package soilmaker.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,15 +16,15 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 @Mod(modid="SoilMaker", name="SoilMaker", version="1.0.0")
-public class mod_SoilMaker{
-@SidedProxy(clientSide="SoilMaker.client.ClientProxy", serverSide="SoilMaker.common.CommonProxy")
+public class SoilMaker{
+@SidedProxy(clientSide="soilmaker.client.ClientProxy", serverSide="soilmaker.common.CommonProxy")
 
 public static CommonProxy proxy;
  @Mod.Instance("SoilMaker")   
- public static mod_SoilMaker instance;
+ public static SoilMaker instance;
  
 
- public static Block SoilMaker;
+ public static Block soilMaker;
 
  
  public int SoilMakerID;
@@ -43,10 +43,10 @@ public static CommonProxy proxy;
 	  
       config.save();
       
-      SoilMaker = new BlockSoilMaker(SoilMakerID,false,1).setUnlocalizedName("soilmaker").func_111022_d("soilmaker").setHardness(3.5F).setCreativeTab(CreativeTabs.tabDecorations);
+      soilMaker = new BlockSoilMaker(SoilMakerID,false,1).setUnlocalizedName("soilmaker").setTextureName("soilmaker").setHardness(3.5F).setCreativeTab(CreativeTabs.tabDecorations);
 
- 	 LanguageRegistry.addName(SoilMaker,"Soil Maker");
- 	 LanguageRegistry.instance().addNameForObject(SoilMaker,"zh_CN","垃圾焚烧炉"); 
+ 	 LanguageRegistry.addName(soilMaker,"Soil Maker");
+ 	 LanguageRegistry.instance().addNameForObject(soilMaker,"zh_CN","垃圾焚烧炉"); 
 	 
 	 
 	 
@@ -59,15 +59,12 @@ public static CommonProxy proxy;
 	 
 	 //registerTileEntity
 	 GameRegistry.registerTileEntity(TileEntitySoilMaker.class, "TileEntitySoilMaker");
-	 GameRegistry.registerBlock(SoilMaker,"SoilMaker");
-	 GameRegistry.addRecipe(new ItemStack(mod_SoilMaker.SoilMaker,1), 
+	 GameRegistry.registerBlock(soilMaker,"SoilMaker");
+	 GameRegistry.addRecipe(new ItemStack(soilMaker,1), 
 			 "xxx",
 			 " y ",
 			 'x', Item.ingotIron,
 			 'y',Block.furnaceIdle
-			 
-
-
 			 );
 	 
 	 NetworkRegistry.instance().registerGuiHandler(this, proxy);

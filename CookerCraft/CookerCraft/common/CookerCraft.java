@@ -1,7 +1,10 @@
-package CookerCraft.common ;
-import CookerCraft.common.utils.Config;
-import CookerCraft.common.utils.InitBlock;
-import CookerCraft.common.utils.InitItem;
+package cookercraft.common ;
+import cookercraft.common.misc.Config;
+import cookercraft.common.misc.CookerEventHandler;
+import cookercraft.common.misc.CreativeTabCooker;
+import cookercraft.common.misc.InitBlock;
+import cookercraft.common.misc.InitItem;
+import cookercraft.common.misc.WorldGenBamboow;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,16 +19,18 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @NetworkMod(serverSideRequired = false, clientSideRequired = true)
-@Mod(modid = "CookerCraft", name = "CookerCraft", version = "1.0.0")
+@Mod(modid = "CookerCraft", name = "CookerCraft", version = "1.1.0")
 public class CookerCraft {
-    public static String ModId="CookerCraft";
+    public static String assetsName="cookercraft";
+
+    public static String modName="CookerCraft";
     //CreativeTabs 
 	public static CreativeTabs tabCookerCraft	= new CreativeTabCooker("CookerCraft");
 	
 	@Mod.Instance("CookerCraft")
 	public static CookerCraft instance;
 
-	@SidedProxy(clientSide = "CookerCraft.client.ClientProxy", serverSide = "CookerCraft.common.CommonProxy")
+	@SidedProxy(clientSide = "cookercraft.client.ClientProxy", serverSide = "cookercraft.common.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@Mod.EventHandler
@@ -35,6 +40,7 @@ public class CookerCraft {
 		new InitItem().initItem();
 	
 		LanguageRegistry.instance().addStringLocalization("itemGroup.CookerCraft", "zh_CN", "厨艺");
+		LanguageRegistry.instance().addStringLocalization("itemGroup.CookerCraft", "en_US", "Cooker Craft");
 	}
 
 	@Mod.EventHandler

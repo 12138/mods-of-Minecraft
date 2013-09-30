@@ -1,6 +1,6 @@
-package CookerCraft.client;
+package cookercraft.client;
 
-import CookerCraft.common.CommonProxy;
+import cookercraft.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
 

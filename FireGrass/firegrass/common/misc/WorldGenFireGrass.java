@@ -1,10 +1,11 @@
-package FireGrass.common;
+package firegrass.common.misc;
 
 import java.util.Random;
 
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import cpw.mods.fml.common.IWorldGenerator;
+import firegrass.common.FireGrass;
 
 public class WorldGenFireGrass implements IWorldGenerator {
 

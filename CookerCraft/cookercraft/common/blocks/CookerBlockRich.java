@@ -1,6 +1,6 @@
-package CookerCraft.common.block;
+package cookercraft.common.blocks;
 
-import CookerCraft.common.utils.InitItem;
+import cookercraft.common.misc.InitItem;
 
 public class CookerBlockRich extends CookerBlockWildRich{
 

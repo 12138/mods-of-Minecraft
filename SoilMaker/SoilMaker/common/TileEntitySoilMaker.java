@@ -1,4 +1,4 @@
-package SoilMaker.common;
+package soilmaker.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,8 +17,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraft.inventory.ISidedInventory;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 

@@ -1,9 +1,9 @@
-package CookerCraft.common.block;
+package cookercraft.common.blocks;
 
-import CookerCraft.common.CookerCraft;
-import CookerCraft.common.item.CookerItem;
-import CookerCraft.common.utils.Config;
-import CookerCraft.common.utils.InitBlock;
+import cookercraft.common.CookerCraft;
+import cookercraft.common.items.CookerItem;
+import cookercraft.common.misc.Config;
+import cookercraft.common.misc.InitBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

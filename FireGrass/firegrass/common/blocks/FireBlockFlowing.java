@@ -1,4 +1,4 @@
-package FireGrass.common;
+package firegrass.common.blocks;
 
 import java.util.Random;
 
@@ -28,7 +28,7 @@ public class FireBlockFlowing extends FireBlockFluid {
 	 */
 	int[] flowCost = new int[4];
 
-	protected FireBlockFlowing(int par1, int color) {
+	public FireBlockFlowing(int par1, int color) {
 		super(par1, color);
 	}
 

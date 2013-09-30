@@ -1,23 +1,22 @@
-package CookerCraft.common.item;
+package firegrass.common.items;
 
-import CookerCraft.common.CookerCraft;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import firegrass.common.FireGrass;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 
-public class CookerItem extends Item {
+public class FireItem extends Item {
 private String UnocalizedName;
-	public CookerItem(int par1) {
+	public FireItem(int par1) {
 		super(par1);
-		this.setCreativeTab(CookerCraft.tabCookerCraft);
+	
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
-    {
-        this.itemIcon = par1IconRegister.registerIcon(CookerCraft.ModId+":"+this.UnocalizedName);
+	public void registerIcons(IconRegister par1IconRegister) {
+		this.itemIcon=par1IconRegister.registerIcon(FireGrass.modName+":"+this.UnocalizedName);
 	}
 
 	@Override
