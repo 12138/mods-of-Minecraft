@@ -4,8 +4,6 @@ mod list:
 
 * FireGrass
 
-* SoilMaker
-
 * MineCharacter
 
 * LightStick
